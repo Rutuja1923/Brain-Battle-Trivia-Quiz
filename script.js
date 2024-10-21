@@ -36,3 +36,8 @@ function validateNames() {
 player1Input.addEventListener('input', validateNames);
 player2Input.addEventListener('input', validateNames);
 
+//adding category page and removing home page
+nextButton.addEventListener('click', () => {
+    homePage.classList.add('hidden');
+    categoryPage.classList.remove('hidden');
+});
