@@ -1,0 +1,111 @@
+/*global styling*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #231942;
+    color : #feeafa;
+    height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*home-page styling*/
+.instructions-div{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    color: #feeafa;
+    border-radius: 5px;
+}
+.instructions-div > a{
+    display: block;
+    text-decoration: none;
+    font-size: 20px;
+    color: #feeafa;
+}
+.instructions-div:hover{
+    background-color: rgba(73, 68, 86, 0.5);
+}
+.page{
+    text-align: center;
+}
+#home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    margin-top : 80px;
+    font-size: 50px;
+    margin-bottom: 0px;
+}
+h3{
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+.image{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+#versus-icon{
+    border-radius: 50%;
+    border:none;
+}
+.player-container{
+    margin:30px auto;
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+.player1-div,
+.player2-div{
+    display: flex;
+    flex-direction: column;
+    gap : 30px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 5px;
+}
+input{
+    background-color: #ffd6ff;
+    color: #231942;
+    width: 250px;
+    height: 30px;
+    border: none;
+    border-radius: 16px;
+    text-align: center;
+    font-size: large;
+}
+input::-webkit-input-placeholder { 
+    color: #231942;
+    text-align: center;
+}
+button, input[type="text"] {
+    cursor: pointer;
+}
+input:focus{
+    outline: none;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #ffd6ff;
+    color: #231942;
+    font-size: large;
+}
+#next-btn{
+    background-color: #9f86c0;
+    border: 2px solid #5e548e ;
+    border-radius: 16px;
+    padding: 10px 20px;
+    margin:20px auto;
+    color: #ffd6ff;
+    font-size: 30px;
+    height: 60px;
+}
+#next-btn:hover{
+    color:#0b2545;
+}
