@@ -7,7 +7,9 @@ body {
     margin: 0;
     box-sizing: border-box;
 }
-
+.hidden {
+    display: none;
+}
 /*home-page styling*/
 .instructions-div{
     position: absolute;
@@ -27,7 +29,7 @@ body {
 .instructions-div:hover{
     background-color: rgba(73, 68, 86, 0.5);
 }
-.page{
+.page , p{
     text-align: center;
 }
 #home-page{
@@ -56,7 +58,7 @@ h3{
     border:none;
 }
 .player-container{
-    margin:30px auto;
+    margin:20px auto;
     display: flex;
     flex-direction: row;
     gap:30px;
@@ -101,7 +103,7 @@ input:focus{
     border: 2px solid #5e548e ;
     border-radius: 16px;
     padding: 10px 20px;
-    margin:20px auto;
+    margin:10px auto;
     color: #ffd6ff;
     font-size: 30px;
     height: 60px;
