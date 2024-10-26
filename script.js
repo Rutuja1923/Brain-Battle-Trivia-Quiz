@@ -53,3 +53,20 @@ nextButton.addEventListener('click', () => {
     homePage.classList.add('hidden');
     categoryPage.classList.remove('hidden');
 });
+
+//defining array of requried categories
+const requiredCategories = ['Music','Science','Food and Drink','Geography','History','General Knowledge','Arts and Literature','Film','Sport','Words','People','Society and Culture'];
+const categoryIconMap = {
+  'Music': 'assets/music-icon.png',
+  'Science': 'assets/science-icon.png',
+  'Food and Drink': 'assets/food-n-drink-icon.png',
+  'Geography': 'assets/geography-icon.png',
+  'History': 'assets/history-icon.png',
+  'General Knowledge': 'assets/general-knowledge-icon.png',
+  'Arts and Literature': 'assets/arts-n-literature-icon.png',
+  'Film' : 'assets/films-icon.png',
+  'Sport': 'assets/sports-icon.png',
+  'Words': 'assets/words-icon.png',
+  'People': 'assets/people-icon.png',
+  'Society and Culture': 'assets/society-culture-icon.png'
+};
