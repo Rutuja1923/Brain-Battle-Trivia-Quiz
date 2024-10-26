@@ -70,3 +70,46 @@ const categoryIconMap = {
   'People': 'assets/people-icon.png',
   'Society and Culture': 'assets/society-culture-icon.png'
 };
+
+function generateCategoryDiv() {
+
+    requiredCategories.forEach(category => {
+		
+    	//creating a div for each category
+      	const categoryDiv = document.createElement('div');
+      	categoryDiv.classList.add('category-box');
+
+      	//creating an img element for the icon
+      	const icon = document.createElement('img');
+      	icon.src = categoryIconMap[category];
+      	icon.alt = `${category} icon`;
+      	categoryDiv.appendChild(icon);
+
+      	//creating a paragraph element for the title
+    	const title = document.createElement('p');
+    	title.textContent = category;
+    	categoryDiv.appendChild(title);
+
+    	//adding an event listener when player clicks on category-div
+    	categoryDiv.addEventListener('click', () => {
+
+      		selectedCategory =  category.toLowerCase().replace(/\s+/g, '_');   //converting to API frinedly format
+
+      		//active start button
+      		startButton.disabled = false;
+      		startButton.classList.add('active');
+      		startButton.style.backgroundColor = 'rgb(181, 228, 140)';
+      		startButton.style.color = '#1b4332';
+
+      		//adding event-listener for start button 
+      		startButton.addEventListener('click', () =>{
+        		categoryPage.classList.add('hidden');
+        		quizPage.classList.remove('hidden');
+				fetchQuestions(selectedCategory);			//call the function
+				playedCategories.push(selectedCategory);    //add to the already selected category list
+			});
+    	}); 
+    	//appending the div to the container for categories
+    	categoriesDiv.appendChild(categoryDiv);
+    });
+};
