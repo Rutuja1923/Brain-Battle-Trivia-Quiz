@@ -71,10 +71,11 @@ const categoryIconMap = {
   'Society and Culture': 'assets/society-culture-icon.png'
 };
 
+//generating the category div dynamically
 function generateCategoryDiv() {
 
     requiredCategories.forEach(category => {
-		
+
     	//creating a div for each category
       	const categoryDiv = document.createElement('div');
       	categoryDiv.classList.add('category-box');
