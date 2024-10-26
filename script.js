@@ -114,3 +114,13 @@ function generateCategoryDiv() {
     	categoriesDiv.appendChild(categoryDiv);
     });
 };
+
+//call the function to generate 
+generateCategoryDiv();
+
+//function to fetch and generate questions on quizPage
+function fetchQuestions(selectedCategory){
+	console.log(selectedCategory); //dummy check
+};
+
+fetchQuestions(selectedCategory);
