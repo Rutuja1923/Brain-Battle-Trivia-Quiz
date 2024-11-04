@@ -22,8 +22,8 @@ let selectedCategory ;
 
 //player-name validation function
 function validateNames() {
-    const player1Name = player1Input.value.trim();
-    const player2Name = player2Input.value.trim();
+    player1Name = player1Input.value.trim();
+    player2Name = player2Input.value.trim();
     //for empty name
     if (player1Name === '' || player2Name === '') {
         errorMessage.textContent = 'Player name cannot be empty';
@@ -91,36 +91,36 @@ function generateCategoryDiv() {
     	title.textContent = category;
     	categoryDiv.appendChild(title);
 
-    	//adding an event listener when player clicks on category-div
-    	categoryDiv.addEventListener('click', () => {
-
-      		selectedCategory =  category.toLowerCase().replace(/\s+/g, '_');   //converting to API frinedly format
-
-      		//active start button
-      		startButton.disabled = false;
-      		startButton.classList.add('active');
-      		startButton.style.backgroundColor = 'rgb(181, 228, 140)';
-      		startButton.style.color = '#1b4332';
-
-      		//adding event-listener for start button 
-      		startButton.addEventListener('click', () =>{
-        		categoryPage.classList.add('hidden');
-        		quizPage.classList.remove('hidden');
-				fetchQuestions(selectedCategory);			//call the function
-				playedCategories.push(selectedCategory);    //add to the already selected category list
-			});
-    	}); 
-    	//appending the div to the container for categories
-    	categoriesDiv.appendChild(categoryDiv);
+        //appending the div to the container for categories
+    	categoriesDiv.appendChild(categoryDiv);   
+        
+        //adding an event listener when player clicks on any category-div
+        categoryDiv.addEventListener('click', () =>{
+            //converting to API frinedly format
+            selectedCategory =  category.toLowerCase().replace(/\s+/g, '_');  
+            //active start button
+            startButton.disabled = false;
+            startButton.classList.add('active');
+            startButton.style.backgroundColor = 'rgb(181, 228, 140)';
+            startButton.style.color = '#1b4332';
+    
+            //adding event-listener for start button 
+            startButton.addEventListener('click', () =>{
+                categoryPage.classList.add('hidden');
+                quizPage.classList.remove('hidden');
+                loadQuestion();
+                player1CurrScore=0;
+                player2CurrScore=0;
+                //add to the already selected category list
+                playedCategories.push(selectedCategory);    
+                //setting the player names for quiz page
+                player1NamePara.innerText = player1Name;    
+                player2NamePara.innerText = player2Name; 
+            });
+        });
     });
 };
 
 //call the function to generate 
 generateCategoryDiv();
 
-//function to fetch and generate questions on quizPage
-function fetchQuestions(selectedCategory){
-	console.log(selectedCategory); //dummy check
-};
-
-fetchQuestions(selectedCategory);
