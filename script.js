@@ -268,3 +268,21 @@ function handleAnswerClick(selectedIndex) {
         button.disabled = true;
     });
 };
+
+//function to click on the next question
+function handleNextQuestion() {
+    if (questionIndex < 6) {
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+        questionIndex++;
+        loadQuestion();
+        selectedAnswer = null;
+    } 
+    if(questionIndex == 6) {
+        nextQuestionBtn.style.display="none";
+        const viewScoreBtn = document.createElement('button');
+        viewScoreBtn.innerText = 'View Score';
+        viewScoreBtn.classList.add('view-score-btn');
+        viewScoreBtn.onclick = () => viewScorePage();
+        quizPage.appendChild(viewScoreBtn);
+    }
+};
