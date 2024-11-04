@@ -178,3 +178,11 @@ function getDifficultyLevel(questionIndex){
     currDifficulty = difficulties[Math.floor((questionIndex - 1) / 2)];
     return currDifficulty;
 }
+
+//function to fetch and generate questions on quizPage
+async function fetchQuestions(selectedCategory){
+    const difficulty = getDifficultyLevel(questionIndex);
+    const response = await fetch(`https://the-trivia-api.com/v2/questions?limit=1&categories=${selectedCategory}&difficulties=${difficulty}`);
+    const data = await response.json();
+    return data[0];
+};
