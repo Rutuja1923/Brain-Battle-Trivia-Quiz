@@ -19,6 +19,37 @@ const startButton = document.getElementById('start-btn');
 //array to keep track of selected categories
 let playedCategories = [];
 let selectedCategory ;
+let player1Name;
+let player2Name;
+let player1TotScore = 0;
+let player2TotScore = 0;
+let player1CurrScore = 0 ;
+let player2CurrScore = 0 ;
+let currentPlayer = 1;
+let questionIndex = 1;
+let currDifficulty ;
+const difficulties = ['easy','medium','hard'];
+const scoreList = [10,15,20];
+let correctAnswerIndex ;
+let selectedAnswer=null ;
+
+//accessing eleemnts from quiz-page
+const player1NamePara = document.getElementById('player1-name-para');
+const player2NamePara = document.getElementById('player2-name-para');
+const p1EasyDiv = document.getElementById('p1-easy');
+const p1MediumDiv = document.getElementById('p1-medium');
+const p1HardDiv = document.getElementById('p1-hard');
+const p2EasyDiv = document.getElementById('p2-easy');
+const p2MediumDiv = document.getElementById('p2-medium');
+const p2HardDiv = document.getElementById('p2-hard');
+const currentPlayerName = document.getElementById('current-player');
+const currentCategory = document.getElementById('current-category');
+const currentLevel = document.getElementById('current-level');
+const questionText = document.getElementById('question-text');
+const optionsButtonsDiv = document.getElementById('answer-buttons');
+const nextQuestionBtn = document.getElementById('next-question');
+const scoreDivPlayer1 = [p1EasyDiv , p1MediumDiv , p1HardDiv ];
+const scoreDivPlayer2 = [p2EasyDiv , p2MediumDiv , p2HardDiv ];
 
 //player-name validation function
 function validateNames() {
