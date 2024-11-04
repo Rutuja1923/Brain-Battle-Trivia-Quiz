@@ -199,7 +199,7 @@ function displayQuestion(questionData, questionNumber) {
 
     //display player name
     currentPlayerName.innerText= setPlayerName();
-    
+
     //setting the question text with question number
     questionText.innerText = `Q${questionNumber}: ${questionData.question.text}`;
   
@@ -219,4 +219,10 @@ function displayQuestion(questionData, questionNumber) {
         optionButton.onclick = () => handleAnswerClick(index);
         optionsButtonsDiv.appendChild(optionButton);
     });
+};
+
+//function to load question and decide difficulty level
+async function loadQuestion() {
+    const questionData = await fetchQuestions(selectedCategory);
+    displayQuestion(questionData, questionIndex);
 };
