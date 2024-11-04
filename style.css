@@ -171,3 +171,116 @@ input:focus{
 #start-btn:hover{
     background-color: #ccc;
 }
+
+/*quiz page style*/
+#quiz-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+ .score-bar{
+    margin:20px auto;
+} 
+.player-score-bar{
+    display: flex;
+    flex-direction: row;
+    gap: none;
+    border:1px solid #fc9efc;
+    margin: 5px auto;
+    padding: 2px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 25px;
+}
+.stars-bar{
+    display: flex;
+    flex-direction: row;
+    margin-left: 170px;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+#p1-easy,
+#p1-medium,
+#p1-hard,
+#p2-easy,
+#p2-medium,
+#p2-hard{
+    border: 2px solid #fc9efc;
+    width: 100px;
+    background-color: #fee3fe;
+    margin: 2px;
+    height: 20px;
+}
+
+#player1-name-para,
+#player2-name-para{
+    margin-right: 50px;
+    text-align: center;
+    margin-left : 5px;
+    line-height: 25px;
+}
+
+.question-div{
+    width: 80%;
+    border: 2px solid #fc9efc;
+}
+
+.q-info-div{
+    display: flex;
+    flex-direction: row;
+    gap:50px;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding:10px 20px;
+}
+
+#current-player,
+#current-category,
+#current-level{
+    color: #f6aef6;
+    font-weight: bolder;
+}
+
+#question-text{
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.options-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.options-div button{
+    padding: 5px 20px;
+    margin: 10px 10px;
+    height: 50px;
+    background-color: #ffd6ff;
+    color: #231942;
+    font-weight: bolder;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+}
+
+#next-question,
+.view-score-btn{
+    padding : 10px 20px;
+    margin : 10px auto;
+    background-color: #fc9efc;
+    color: #231942;
+    outline : none;
+    border : none;
+    border-radius: 20px;
+    height: 40px;
+    font-size: 20px;
+}
