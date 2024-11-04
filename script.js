@@ -186,3 +186,37 @@ async function fetchQuestions(selectedCategory){
     const data = await response.json();
     return data[0];
 };
+
+//function to display the questions 
+function displayQuestion(questionData, questionNumber) {
+
+    //convert the string from api friendly format to more appealing format
+    currentCategory.innerText = selectedCategory.split('_').map(
+        word =>word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+    //display current difficulty
+    currentLevel.innerText= currDifficulty.charAt(0).toUpperCase() + currDifficulty.slice(1);
+
+    //display player name
+    currentPlayerName.innerText= setPlayerName();
+    
+    //setting the question text with question number
+    questionText.innerText = `Q${questionNumber}: ${questionData.question.text}`;
+  
+    //shuffle all the options and display them as buttons
+    const allOptions = [...questionData.incorrectAnswers, questionData.correctAnswer];
+    shuffle(allOptions);
+    correctAnswerIndex = allOptions.indexOf(questionData.correctAnswer);
+  
+    //clear any previous options
+    optionsButtonsDiv.innerHTML = '';
+  
+    // Create buttons for each option
+    allOptions.forEach((option, index) => {
+        const optionButton = document.createElement('button');
+        optionButton.innerText = option;
+        optionButton.classList.add('option-button');
+        optionButton.onclick = () => handleAnswerClick(index);
+        optionsButtonsDiv.appendChild(optionButton);
+    });
+};
