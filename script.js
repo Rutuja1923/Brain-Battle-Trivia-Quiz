@@ -288,3 +288,9 @@ function handleNextQuestion() {
 };
 
 nextQuestionBtn.addEventListener('click',handleNextQuestion);
+
+//results page logic!
+function viewScorePage(){
+    quizPage.classList.add('hidden');
+    resultsPage.classList.remove('hidden');
+}
