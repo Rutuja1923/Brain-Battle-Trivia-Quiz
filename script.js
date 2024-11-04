@@ -172,3 +172,9 @@ function setPlayerName(){
         return player2Name;
     }
 };
+
+//function to get current difficulty
+function getDifficultyLevel(questionIndex){
+    currDifficulty = difficulties[Math.floor((questionIndex - 1) / 2)];
+    return currDifficulty;
+}
