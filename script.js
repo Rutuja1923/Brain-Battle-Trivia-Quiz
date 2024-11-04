@@ -162,3 +162,13 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 };
+
+//function to set current player name
+function setPlayerName(){
+    if (currentPlayer == 1){
+        return player1Name;
+    }
+    else{
+        return player2Name;
+    }
+};
