@@ -286,3 +286,5 @@ function handleNextQuestion() {
         quizPage.appendChild(viewScoreBtn);
     }
 };
+
+nextQuestionBtn.addEventListener('click',handleNextQuestion);
