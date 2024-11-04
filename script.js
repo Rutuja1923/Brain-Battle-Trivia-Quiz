@@ -221,8 +221,50 @@ function displayQuestion(questionData, questionNumber) {
     });
 };
 
-//function to load question and decide difficulty level
+//function to load question
 async function loadQuestion() {
     const questionData = await fetchQuestions(selectedCategory);
     displayQuestion(questionData, questionIndex);
+};
+
+//function to handle the option click
+function handleAnswerClick(selectedIndex) {
+    const optionButtons = document.querySelectorAll('.option-button');
+    selectedAnswer = selectedIndex ;
+    let currIndex = difficulties.indexOf(currDifficulty);
+    let currScore = scoreList[currIndex];
+    if (selectedAnswer === correctAnswerIndex){
+        if (currentPlayer == 1){
+            player1TotScore += currScore;
+            player1CurrScore += currScore; 
+            scoreDivPlayer1[currIndex].style.backgroundColor = "#96cc00";
+        }
+        else{
+            player2TotScore += currScore;
+            player2CurrScore += currScore;
+            scoreDivPlayer2[currIndex].style.backgroundColor = "#96cc00";
+        }
+    }
+    else{
+        if (currentPlayer == 1){
+            scoreDivPlayer1[currIndex].style.backgroundColor = "#ff6947";
+        }
+        else{
+            scoreDivPlayer2[currIndex].style.backgroundColor = "#ff6947";
+        }
+    }
+    console.log(player1CurrScore , player2CurrScore);
+    //cheking if answer is correct or not and updating the oprions color
+    optionButtons.forEach((button, index) => {
+        if (index === correctAnswerIndex) {
+            button.style.backgroundColor = '#96cc00';
+        } 
+        else if (index === selectedAnswer) {
+            button.style.backgroundColor = '#ff6947';
+        } 
+        else {
+            button.style.backgroundColor = '';
+        }
+        button.disabled = true;
+    });
 };
