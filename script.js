@@ -32,6 +32,7 @@ const difficulties = ['easy','medium','hard'];
 const scoreList = [10,15,20];
 let correctAnswerIndex ;
 let selectedAnswer=null ;
+let categoryDiv;
 
 //accessing eleemnts from quiz-page
 const player1NamePara = document.getElementById('player1-name-para');
@@ -50,6 +51,27 @@ const optionsButtonsDiv = document.getElementById('answer-buttons');
 const nextQuestionBtn = document.getElementById('next-question');
 const scoreDivPlayer1 = [p1EasyDiv , p1MediumDiv , p1HardDiv ];
 const scoreDivPlayer2 = [p2EasyDiv , p2MediumDiv , p2HardDiv ];
+
+//getting elements of post-category page
+const currScoreBoard = document.getElementById('curr-score-board');
+const currWinner = document.getElementById('current-winner');
+const p1Name = document.getElementById('p1-name');
+const p2Name = document.getElementById('p2-name');
+const p1currScore = document.getElementById('player1-current-score');
+const p2currScore = document.getElementById('player2-current-score');
+const chooseAnotherCatBtn = document.getElementById('choose-another-category');
+const endGameBtn = document.getElementById('end-the-game');
+
+
+//getting elements of results page
+const winnerName = document.getElementById('winner-name');
+const scoreBoardDiv = document.getElementsByClassName('score-board');
+const row1Div = document.getElementById('row1');
+const row2Div = document.getElementById('row2');
+const player1NameSpan = document.getElementById('player1-name-span');
+const player2NameSpan = document.getElementById('player2-name-span');
+const player1ScoreSpan = document.getElementById('player1-score');
+const player2ScoreSpan = document.getElementById('player2-score');
 
 //player-name validation function
 function validateNames() {
@@ -108,7 +130,7 @@ function generateCategoryDiv() {
     requiredCategories.forEach(category => {
 
     	//creating a div for each category
-      	const categoryDiv = document.createElement('div');
+      	categoryDiv = document.createElement('div');
       	categoryDiv.classList.add('category-box');
 
       	//creating an img element for the icon
@@ -142,6 +164,7 @@ function generateCategoryDiv() {
                 loadQuestion();
                 player1CurrScore=0;
                 player2CurrScore=0;
+                questionIndex=1;
                 //add to the already selected category list
                 playedCategories.push(selectedCategory);    
                 //setting the player names for quiz page
@@ -154,7 +177,7 @@ function generateCategoryDiv() {
 
 //call the function to generate 
 generateCategoryDiv();
-
+console.log(playedCategories);
 //function to shuffle the array containing options
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -253,7 +276,6 @@ function handleAnswerClick(selectedIndex) {
             scoreDivPlayer2[currIndex].style.backgroundColor = "#ff6947";
         }
     }
-    console.log(player1CurrScore , player2CurrScore);
     //cheking if answer is correct or not and updating the oprions color
     optionButtons.forEach((button, index) => {
         if (index === correctAnswerIndex) {
@@ -282,15 +304,62 @@ function handleNextQuestion() {
         const viewScoreBtn = document.createElement('button');
         viewScoreBtn.innerText = 'View Score';
         viewScoreBtn.classList.add('view-score-btn');
-        viewScoreBtn.onclick = () => viewScorePage();
+        viewScoreBtn.onclick = () => loadPostQuestionsPage();
         quizPage.appendChild(viewScoreBtn);
     }
 };
 
 nextQuestionBtn.addEventListener('click',handleNextQuestion);
 
+//post-question-page logic
+function loadPostQuestionsPage(){
+    quizPage.classList.add('hidden');
+    postQuestionsPage.classList.remove('hidden');
+    currWinner.innerText = getWinnerName(player1CurrScore,player2CurrScore);
+    p1Name.innerText = player1Name ;
+    p2Name.innerText = player2Name ;
+    p1currScore.innerText = player1CurrScore ;
+    p2currScore.innerText = player2CurrScore ;
+    chooseAnotherCatBtn.onclick = () => chooseNextCategory();
+    endGameBtn.onclick = () => endGame();
+}
+
+//function to get the winner name
+function getWinnerName(p1Score , p2Score){
+    if (p1Score > p2Score){
+        return player1Name;
+    }
+    else{
+        return player2Name;
+    }
+}
+
 //results page logic!
 function viewScorePage(){
-    quizPage.classList.add('hidden');
+    winnerName.innerText = getWinnerName(player1TotScore,player2TotScore);
+    player1NameSpan.innerText = player1Name;
+    player2NameSpan.innerText = player2Name;
+    player1ScoreSpan.innerText = player1TotScore;
+    player2ScoreSpan.innerText = player2TotScore;
+}
+
+
+function chooseNextCategory(){
+    postQuestionsPage.classList.add('hidden');
+    categoryPage.classList.remove('hidden');
+    startButton.disabled = true ;
+    startButton.style.backgroundColor = 'rgb(254, 234, 250)' ;
+    selectedCategory = null;
+    categoryDiv.addEventListener('click' , () => {
+        if (playedCategories.includes(selectedCategory)){
+            alert('This category is already selected ! please select another category!');
+        }
+    });
+    
+}
+
+function endGame(){
+    postQuestionsPage.classList.add('hidden');
     resultsPage.classList.remove('hidden');
+    viewScorePage();
 }
