@@ -273,7 +273,9 @@ input:focus{
 }
 
 #next-question,
-.view-score-btn{
+.view-score-btn,
+#choose-another-category,
+#end-the-game{
     padding : 10px 20px;
     margin : 10px auto;
     background-color: #fc9efc;
@@ -284,3 +286,72 @@ input:focus{
     height: 40px;
     font-size: 20px;
 }
+#post-questions-page,
+#results-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#goto-home-page{
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    margin:10px 20px 50px 20px;
+}
+
+#goto-home-page > a {
+    text-decoration: none;
+    background-color: #ffd6ff;
+    padding: 10px 20px;
+    border-radius: 16px;
+}
+#results-page h2{
+    margin-bottom: 20px;
+}
+#results-page h3{
+    font-size: xx-large;
+}
+
+.curr-score-page,
+.score-board{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 40px;
+    border: #ffd6ff;
+}
+
+#btn-div{
+    display: flex;
+    flex-direction: row;
+    gap : 20px;
+}
+
+#choose-another-category,
+#end-the-game{
+    padding: 10px 20px;
+    background-color: #ffd6ff;
+    margin: 10px 20px;
+    color: #231942;
+}
+
+#row1,
+#row2{
+    display: flex;
+    flex-direction: row;
+}
+
+#row1 > div,
+#row2 > div {
+    width : 200px;
+    height: 50px;
+    padding: 10px 20px;
+    border: 1px solid #ffd6ff;
+    font-weight: bold;
+}
+
