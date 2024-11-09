@@ -51,6 +51,7 @@ const optionsButtonsDiv = document.getElementById('answer-buttons');
 const nextQuestionBtn = document.getElementById('next-question');
 const scoreDivPlayer1 = [p1EasyDiv , p1MediumDiv , p1HardDiv ];
 const scoreDivPlayer2 = [p2EasyDiv , p2MediumDiv , p2HardDiv ];
+const scoreBars = document.getElementsByClassName('bar');
 
 //getting elements of post-category page
 const currScoreBoard = document.getElementById('curr-score-board');
@@ -103,8 +104,14 @@ player2Input.addEventListener('input', validateNames);
 
 //adding category page and removing home page
 nextButton.addEventListener('click', () => {
-    homePage.classList.add('hidden');
-    categoryPage.classList.remove('hidden');
+    if (player1Name == undefined || player2Name == undefined){
+        errorMessage.innerText = 'Please enter both players name.';
+        startButton.disabled = true ;
+    }
+    else{
+        homePage.classList.add('hidden');
+        categoryPage.classList.remove('hidden');
+    }
 });
 
 //defining array of requried categories
@@ -204,6 +211,8 @@ function getDifficultyLevel(questionIndex){
 
 //function to fetch and generate questions on quizPage
 async function fetchQuestions(selectedCategory){
+    questionText.innerText = 'Loading.......';
+    optionsButtonsDiv.innerHTML='';
     const difficulty = getDifficultyLevel(questionIndex);
     const response = await fetch(`https://the-trivia-api.com/v2/questions?limit=1&categories=${selectedCategory}&difficulties=${difficulty}`);
     const data = await response.json();
@@ -304,7 +313,15 @@ function handleNextQuestion() {
         const viewScoreBtn = document.createElement('button');
         viewScoreBtn.innerText = 'View Score';
         viewScoreBtn.classList.add('view-score-btn');
-        viewScoreBtn.onclick = () => loadPostQuestionsPage();
+        viewScoreBtn.onclick = () => {
+            for (let i = 0; i < scoreBars.length; i++) {
+                scoreBars[i].style.backgroundColor = "#fee3fe";
+            }
+            viewScoreBtn.style.display = 'none';
+            nextQuestionBtn.style.display = 'block';
+            currentPlayer = 1 ;
+            loadPostQuestionsPage()
+        };
         quizPage.appendChild(viewScoreBtn);
     }
 };
@@ -315,28 +332,45 @@ nextQuestionBtn.addEventListener('click',handleNextQuestion);
 function loadPostQuestionsPage(){
     quizPage.classList.add('hidden');
     postQuestionsPage.classList.remove('hidden');
-    currWinner.innerText = getWinnerName(player1CurrScore,player2CurrScore);
+    let winName = getWinnerName(player1CurrScore,player2CurrScore);
+    if (!winName){
+        const winnerMsg = document.getElementById('winner-message');
+        winnerMsg.innerText = "No winner this time . It's a tie! But you still have some categories left. Wanna try?"
+    }
+    else{
+        currWinner.innerText = winName;
+    }
     p1Name.innerText = player1Name ;
     p2Name.innerText = player2Name ;
     p1currScore.innerText = player1CurrScore ;
     p2currScore.innerText = player2CurrScore ;
-    chooseAnotherCatBtn.onclick = () => chooseNextCategory();
-    endGameBtn.onclick = () => endGame();
+    chooseAnotherCatBtn.onclick = () => {chooseNextCategory()};
+    endGameBtn.onclick = () => {endGame()};
 }
 
 //function to get the winner name
 function getWinnerName(p1Score , p2Score){
-    if (p1Score > p2Score){
+    if(p1Score > p2Score){
         return player1Name;
     }
-    else{
+    else if(p2Score > p1Score){
         return player2Name;
+    }
+    else{
+        return null;
     }
 }
 
 //results page logic!
 function viewScorePage(){
-    winnerName.innerText = getWinnerName(player1TotScore,player2TotScore);
+    let winName  = getWinnerName(player1TotScore,player2TotScore);
+    if(!winName){
+        const msg = document.getElementById('message');
+        msg.innerText = "It's a tie ! Well played both the players!";
+    }
+    else{
+        winnerName.innerText = winName;
+    }
     player1NameSpan.innerText = player1Name;
     player2NameSpan.innerText = player2Name;
     player1ScoreSpan.innerText = player1TotScore;
@@ -363,3 +397,7 @@ function endGame(){
     resultsPage.classList.remove('hidden');
     viewScorePage();
 }
+
+// const restartQuiz = document.createElement(button);
+// restartQuiz.classList.add('restart-quiz');
+// restartQuiz.innerText = 'Restart Quiz';
