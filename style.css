@@ -355,3 +355,18 @@ input:focus{
     font-weight: bold;
 }
 
+.curr-score-board{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#post-questions-page > p{
+    font-size: 30px;
+    margin:30px auto;
+}
+
+#winner-message{
+    font-size:30px;
+    margin:80px auto;
+}
