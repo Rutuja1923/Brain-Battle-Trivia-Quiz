@@ -265,12 +265,19 @@ function displayQuestion(questionData, questionNumber) {
     //clear any previous options
     optionsButtonsDiv.innerHTML = '';
   
+    nextQuestionBtn.disabled = true;
+    nextQuestionBtn.style.backgroundColor = '#FEEAFA';
+    
     // Create buttons for each option
     allOptions.forEach((option, index) => {
         const optionButton = document.createElement('button');
         optionButton.innerText = option;
         optionButton.classList.add('option-button');
-        optionButton.onclick = () => {handleAnswerClick(index)};
+        optionButton.onclick = () => {
+            handleAnswerClick(index);
+            nextQuestionBtn.disabled = false;
+            nextQuestionBtn.style.backgroundColor = '#fc9efc';
+        };
         optionsButtonsDiv.appendChild(optionButton);
     });
     nextQuestionBtn.addEventListener('click',handleNextQuestion);
