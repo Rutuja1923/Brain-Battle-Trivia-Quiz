@@ -31,8 +31,6 @@ const difficulties = ['easy','medium','hard'];
 const scoreList = [10,15,20];
 let correctAnswerIndex ;
 let selectedAnswer=null ;
-let flag=0;
-//let categoryDiv;
 
 //accessing eleemnts from quiz-page
 const player1NamePara = document.getElementById('player1-name-para');
@@ -91,7 +89,6 @@ function validateNames() {
     else {
         errorMessage.textContent = '';
         nextButton.disabled = false;
-        nextButton.classList.add('active');
         nextButton.style.backgroundColor = 'rgb(181, 228, 140)';
         nextButton.style.color = '#1b4332';
     }
@@ -112,6 +109,7 @@ nextButton.addEventListener('click', () => {
         categoryPage.classList.remove('hidden');
         //call the function to generate category div
         generateCategoryDiv();
+        isCategorySelected = false;
     }
 });
 
@@ -168,7 +166,10 @@ function generateCategoryDiv() {
             else{
                 //disable the categoryDiv once it is selected
                 selectedCategoryDiv.classList.add('disabled');
-                flag = 1 ;
+                //disable all category divs to avoid further selection
+                document.querySelectorAll('.category-box').forEach(div => {
+                    div.style.pointerEvents = 'none';
+                });
             }
             //active start button
             startButton.disabled = false;
@@ -180,7 +181,7 @@ function generateCategoryDiv() {
                 categoryPage.classList.add('hidden');
                 quizPage.classList.remove('hidden');
 
-                //add to the already selected category list
+                //add selected category to the already selected categories list
                 if (!playedCategories.includes(selectedCategory)){
                     playedCategories.push(selectedCategory); 
 
@@ -193,6 +194,13 @@ function generateCategoryDiv() {
                     player1NamePara.innerText = player1Name;    
                     player2NamePara.innerText = player2Name; 
                     loadQuestion();
+
+                    //re-enabling all category divs for the next round
+                    document.querySelectorAll('.category-box').forEach(div => {
+                        if (!div.classList.contains('disabled')) {
+                            div.style.pointerEvents = 'auto';
+                        }
+                    });
                 }
             });
         });
