@@ -156,6 +156,11 @@ input:focus{
     background-color: rgba(73, 68, 86, 0.5);
 }
 
+.category-box.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 #start-btn{
     background-color: #FEEAFA;
     color :#231942;
