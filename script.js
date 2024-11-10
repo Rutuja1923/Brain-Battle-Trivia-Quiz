@@ -273,6 +273,7 @@ function displayQuestion(questionData, questionNumber) {
         optionButton.onclick = () => {handleAnswerClick(index)};
         optionsButtonsDiv.appendChild(optionButton);
     });
+    nextQuestionBtn.addEventListener('click',handleNextQuestion);
 };
 
 //function to load question
@@ -347,8 +348,6 @@ function handleNextQuestion() {
     }
 };
 
-nextQuestionBtn.addEventListener('click',handleNextQuestion);
-
 //post-question-page logic
 function loadPostQuestionsPage(){
     quizPage.classList.add('hidden');
@@ -398,6 +397,7 @@ function viewScorePage(){
     player2ScoreSpan.innerText = player2TotScore;
 }
 
+//choose another category function
 function chooseNextCategory(){
     postQuestionsPage.classList.add('hidden');
     categoryPage.classList.remove('hidden');
@@ -406,6 +406,7 @@ function chooseNextCategory(){
     selectedCategory = null;
 }
 
+//end game logic!
 function endGame(){
     postQuestionsPage.classList.add('hidden');
     resultsPage.classList.remove('hidden');
