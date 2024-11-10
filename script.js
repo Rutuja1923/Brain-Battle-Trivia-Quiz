@@ -31,6 +31,7 @@ const difficulties = ['easy','medium','hard'];
 const scoreList = [10,15,20];
 let correctAnswerIndex ;
 let selectedAnswer=null ;
+let flag=0;
 //let categoryDiv;
 
 //accessing eleemnts from quiz-page
@@ -159,36 +160,40 @@ function generateCategoryDiv() {
 
             //converting to API frinedly format
             selectedCategory =  category.toLowerCase().replace(/\s+/g, '_');  
-
+            let selectedCategoryDiv = categoryDiv ;
             if (playedCategories.includes(selectedCategory)) {
                 alert('Already played, choose another category.');
                 return;
             }
             else{
                 //disable the categoryDiv once it is selected
-                categoryDiv.classList.add('disabled');
-                //active start button
-                startButton.disabled = false;
-                startButton.style.backgroundColor = 'rgb(181, 228, 140)';
-                startButton.style.color = '#1b4332';
+                selectedCategoryDiv.classList.add('disabled');
+                flag = 1 ;
             }
+            //active start button
+            startButton.disabled = false;
+            startButton.style.backgroundColor = 'rgb(181, 228, 140)';
+            startButton.style.color = '#1b4332';
     
             //adding event-listener for start button 
             startButton.addEventListener('click', () =>{
                 categoryPage.classList.add('hidden');
                 quizPage.classList.remove('hidden');
-                loadQuestion();
+
                 //add to the already selected category list
                 if (!playedCategories.includes(selectedCategory)){
                     playedCategories.push(selectedCategory); 
+
+                    console.log(playedCategories);
+                    player1CurrScore=0;
+                    player2CurrScore=0;
+                    questionIndex=1;
+                    currentPlayer=1;
+                    //setting the player names for quiz page
+                    player1NamePara.innerText = player1Name;    
+                    player2NamePara.innerText = player2Name; 
+                    loadQuestion();
                 }
-                player1CurrScore=0;
-                player2CurrScore=0;
-                questionIndex=1;
-                currentPlayer=1;
-                //setting the player names for quiz page
-                player1NamePara.innerText = player1Name;    
-                player2NamePara.innerText = player2Name; 
             });
         });
     });
