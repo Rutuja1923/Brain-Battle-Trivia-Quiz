@@ -362,7 +362,7 @@ function loadPostQuestionsPage(){
     let winName = getWinnerName(player1CurrScore,player2CurrScore);
     if (!winName){
         const winnerMsg = document.getElementById('winner-message');
-        winnerMsg.innerText = "No winner this time . It's a tie! But you still have some categories left. Wanna try?"
+        winnerMsg.innerHTML = "No winner this time.<br> It's a tie! But you still have some categories left. Wanna try?"
     }
     else{
         currWinner.innerText = winName;
