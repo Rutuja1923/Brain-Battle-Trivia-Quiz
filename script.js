@@ -16,8 +16,7 @@ const errorMessage = document.getElementById("error-message");
 const categoriesDiv = document.getElementById('categories-div');
 const startButton = document.getElementById('start-btn');
 
-//array to keep track of selected categories
-let playedCategories = [];
+let playedCategories = [];    //array to keep track of selected categories
 let selectedCategory ;
 let player1Name;
 let player2Name;
@@ -32,7 +31,7 @@ const difficulties = ['easy','medium','hard'];
 const scoreList = [10,15,20];
 let correctAnswerIndex ;
 let selectedAnswer=null ;
-let categoryDiv;
+//let categoryDiv;
 
 //accessing eleemnts from quiz-page
 const player1NamePara = document.getElementById('player1-name-para');
@@ -62,7 +61,6 @@ const p1currScore = document.getElementById('player1-current-score');
 const p2currScore = document.getElementById('player2-current-score');
 const chooseAnotherCatBtn = document.getElementById('choose-another-category');
 const endGameBtn = document.getElementById('end-the-game');
-
 
 //getting elements of results page
 const winnerName = document.getElementById('winner-name');
@@ -111,6 +109,8 @@ nextButton.addEventListener('click', () => {
     else{
         homePage.classList.add('hidden');
         categoryPage.classList.remove('hidden');
+        //call the function to generate category div
+        generateCategoryDiv();
     }
 });
 
@@ -137,7 +137,7 @@ function generateCategoryDiv() {
     requiredCategories.forEach(category => {
 
     	//creating a div for each category
-      	categoryDiv = document.createElement('div');
+      	let categoryDiv = document.createElement('div');
       	categoryDiv.classList.add('category-box');
 
       	//creating an img element for the icon
@@ -156,24 +156,36 @@ function generateCategoryDiv() {
         
         //adding an event listener when player clicks on any category-div
         categoryDiv.addEventListener('click', () =>{
+
             //converting to API frinedly format
             selectedCategory =  category.toLowerCase().replace(/\s+/g, '_');  
-            //active start button
-            startButton.disabled = false;
-            startButton.classList.add('active');
-            startButton.style.backgroundColor = 'rgb(181, 228, 140)';
-            startButton.style.color = '#1b4332';
+
+            if (playedCategories.includes(selectedCategory)) {
+                alert('Already played, choose another category.');
+                return;
+            }
+            else{
+                //disable the categoryDiv once it is selected
+                categoryDiv.classList.add('disabled');
+                //active start button
+                startButton.disabled = false;
+                startButton.style.backgroundColor = 'rgb(181, 228, 140)';
+                startButton.style.color = '#1b4332';
+            }
     
             //adding event-listener for start button 
             startButton.addEventListener('click', () =>{
                 categoryPage.classList.add('hidden');
                 quizPage.classList.remove('hidden');
                 loadQuestion();
+                //add to the already selected category list
+                if (!playedCategories.includes(selectedCategory)){
+                    playedCategories.push(selectedCategory); 
+                }
                 player1CurrScore=0;
                 player2CurrScore=0;
                 questionIndex=1;
-                //add to the already selected category list
-                playedCategories.push(selectedCategory);    
+                currentPlayer=1;
                 //setting the player names for quiz page
                 player1NamePara.innerText = player1Name;    
                 player2NamePara.innerText = player2Name; 
@@ -182,9 +194,6 @@ function generateCategoryDiv() {
     });
 };
 
-//call the function to generate 
-generateCategoryDiv();
-console.log(playedCategories);
 //function to shuffle the array containing options
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -248,7 +257,7 @@ function displayQuestion(questionData, questionNumber) {
         const optionButton = document.createElement('button');
         optionButton.innerText = option;
         optionButton.classList.add('option-button');
-        optionButton.onclick = () => handleAnswerClick(index);
+        optionButton.onclick = () => {handleAnswerClick(index)};
         optionsButtonsDiv.appendChild(optionButton);
     });
 };
@@ -319,8 +328,7 @@ function handleNextQuestion() {
             }
             viewScoreBtn.style.display = 'none';
             nextQuestionBtn.style.display = 'block';
-            currentPlayer = 1 ;
-            loadPostQuestionsPage()
+            loadPostQuestionsPage();
         };
         quizPage.appendChild(viewScoreBtn);
     }
@@ -377,19 +385,12 @@ function viewScorePage(){
     player2ScoreSpan.innerText = player2TotScore;
 }
 
-
 function chooseNextCategory(){
     postQuestionsPage.classList.add('hidden');
     categoryPage.classList.remove('hidden');
     startButton.disabled = true ;
     startButton.style.backgroundColor = 'rgb(254, 234, 250)' ;
     selectedCategory = null;
-    categoryDiv.addEventListener('click' , () => {
-        if (playedCategories.includes(selectedCategory)){
-            alert('This category is already selected ! please select another category!');
-        }
-    });
-    
 }
 
 function endGame(){
@@ -397,7 +398,3 @@ function endGame(){
     resultsPage.classList.remove('hidden');
     viewScorePage();
 }
-
-// const restartQuiz = document.createElement(button);
-// restartQuiz.classList.add('restart-quiz');
-// restartQuiz.innerText = 'Restart Quiz';
