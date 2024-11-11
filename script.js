@@ -102,7 +102,6 @@ player2Input.addEventListener('input', validateNames);
 nextButton.addEventListener('click', () => {
     if (player1Name == undefined || player2Name == undefined){
         errorMessage.innerText = 'Please enter both players name.';
-        startButton.disabled = true ;
     }
     else{
         homePage.classList.add('hidden');
@@ -247,6 +246,7 @@ function displayQuestion(questionData, questionNumber) {
     currentCategory.innerText = selectedCategory.split('_').map(
         word =>word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
+
     //display current difficulty
     currentLevel.innerText= currDifficulty.charAt(0).toUpperCase() + currDifficulty.slice(1);
 
