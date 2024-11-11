@@ -185,7 +185,7 @@ function generateCategoryDiv() {
                 if (!playedCategories.includes(selectedCategory)){
                     playedCategories.push(selectedCategory); 
 
-                    console.log(playedCategories);
+                    //console.log(playedCategories);
                     player1CurrScore=0;
                     player2CurrScore=0;
                     questionIndex=1;
