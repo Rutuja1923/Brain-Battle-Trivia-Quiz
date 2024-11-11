@@ -109,7 +109,6 @@ nextButton.addEventListener('click', () => {
         categoryPage.classList.remove('hidden');
         //call the function to generate category div
         generateCategoryDiv();
-        isCategorySelected = false;
     }
 });
 
